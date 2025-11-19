@@ -1,7 +1,7 @@
 samples('bubo:fox')
 samples('bubo:waveforms')
 samples('github:bubobubobubobubo/dough-waveforms')
-samples('github:lgmclaughlin/music/d9205f8557a5a7aada66bb19f5f174c8b59359bd/dirty_filx/')
+samples('https://raw.githubusercontent.com/lgmclaughlin/music/main/dirty_filx/')
 
 setcpm(130)
 
