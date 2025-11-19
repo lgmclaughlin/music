@@ -1,7 +1,6 @@
 samples('bubo:fox')
 samples('bubo:waveforms')
 samples('github:bubobubobubobubo/dough-waveforms')
-samples('github:lgmclaughlin/music/dirty_filx/strudel.json')
 
 setcpm(130)
 
@@ -17,10 +16,12 @@ function arpSin(postgain) {
     	.add(note(perlin.range(0,.3)))
     	.slow(2)
     	.phaser(2).phaserdepth("<.25 .5 .75 .5>")
-    	.distort("1.2")
+		.compressor("-10:2:10:.002:.02")
+    	.distort("1.8:.3:diode")
+    	.distort("1:.5:scurve")
     	.room(.8).rsize(8)
     	.orbit(1)
-    	.hpf(400) .postgain(postgain) //.
+    	.hpf(450).postgain(postgain)
 		._punchcard()
 }
 
@@ -33,11 +34,13 @@ function arpSq(postgain) {
     	.add(note(perlin.range(0,.3)))
     	.slow(2)
     	.phaser(2).phaserdepth("<.25 .5 .75 .5>")
-    	.distort(".8")
+    	//.distort("1:.5")
+    	.distort("1.8:.3:diode")
+    	.distort(".7:1:scurve")
     	.delay(".9:.25:.8")
     	.room(.8).rsize(8)
     	.orbit(2)
-    	.lpf(2000)
+    	.lpf(1750)
     	.hpf(450)
     	.postgain(postgain) //.3
 		._punchcard()
@@ -47,9 +50,9 @@ function beatTabla(postgain) {
 	return n(run(8)).s("ftabla")
 		.early(4/8).slow(4).degradeBy(.2)
     	.pan(".2")
-    	.room(.4).rsize(3)
+    	.room(.4).rsize(1)
     	.lpf(3500).hpf(450)
-    	.crush(7.5).orbit(3)
+    	.orbit(3)
     	.postgain(postgain) //.7
 }
 
@@ -88,9 +91,9 @@ function percDrone(postgain) {
 		.postgain(postgain) //.7
 }
 
-function ambience(postgain) {
-	return s("subway").postgain(postgain);
-}
+//function ambience(postgain) {
+//	return s("subway").postgain(postgain);
+//}
 
 arrange(
 	[phrase / phrase, stack(arpSin(0), arpSq(0), beatMain(0))],
@@ -98,6 +101,6 @@ arrange(
 	[phrase * 2, stack(arpSin(1.1), arpSq(.4), beatMain(.55).mask("<[0]!63 1>*2"))],
 	[phrase * 2, stack(arpSin(1.1), beatMain(.55, 0))],
 	[phrase * 2, stack(arpSin(1.1), arpSq(.4), beatMain(.55, .4))],
-	[phrase * 2, stack(arpSin(1.1), beatMain(.55, .4))],
-	[phrase * 2, stack(arpSin(1.1), arpSq(.4), arpPiano(.15), beatMain(.55, .4))],
+	//[phrase * 2, stack(arpSin(1.1), beatMain(.55, .4))]
+	//[phrase * 2, stack(arpSin(1.1), arpSq(.4), arpPiano(.15), beatMain(.55, .4))],
 )
